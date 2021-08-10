@@ -1,8 +1,8 @@
 
 import pandas as pd
 from bs4 import BeautifulSoup
-import urllib, pymysql, calendar, time, json
-from urllib.request import urlopen
+import pymysql, calendar, time, json
+import requests
 from datetime import datetime
 from threading import Timer
 
@@ -10,7 +10,7 @@ class DBUpdater:
     def __init__(self):
         """생성자: MariaDB 연결 및 종목코드 딕셔너리 생성"""
         self.conn = pymysql.connect(host='localhost', user='root',
-            password='myPa$$word', db='INVESTAR', charset='utf8')
+            password='rldnd1684!', db='dailystockpricedata', charset='utf8')
         
         with self.conn.cursor() as curs:
             sql = """
@@ -82,20 +82,19 @@ class DBUpdater:
         """네이버에서 주식 시세를 읽어서 데이터프레임으로 반환"""
         try:
             url = f"http://finance.naver.com/item/sise_day.nhn?code={code}"
-            with urlopen(url) as doc:
-                if doc is None:
-                    return None
-                html = BeautifulSoup(doc, "lxml")
-                pgrr = html.find("td", class_="pgRR")
-                if pgrr is None:
-                    return None
-                s = str(pgrr.a["href"]).split('=')
-                lastpage = s[-1] 
+            html = BeautifulSoup(requests.get(url,
+                headers={'User-agent': 'Mozilla/5.0'}).text, "lxml")
+            pgrr = html.find("td", class_="pgRR")
+            if pgrr is None:
+                return None
+            s = str(pgrr.a["href"]).split('=')
+            lastpage = s[-1]
             df = pd.DataFrame()
             pages = min(int(lastpage), pages_to_fetch)
             for page in range(1, pages + 1):
                 pg_url = '{}&page={}'.format(url, page)
-                df = df.append(pd.read_html(pg_url, header=0)[0])
+                df = df.append(pd.read_html(requests.get(pg_url,
+                    headers={'User-agent': 'Mozilla/5.0'}).text)[0])                                          
                 tmnow = datetime.now().strftime('%Y-%m-%d %H:%M')
                 print('[{}] {} ({}) : {:04d}/{:04d} pages are downloading...'.
                     format(tmnow, company, code, page, pages), end="\r")
