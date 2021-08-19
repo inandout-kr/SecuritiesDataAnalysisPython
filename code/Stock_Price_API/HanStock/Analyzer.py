@@ -22,18 +22,18 @@ class MarketDB:
         for idx in range(len(krx)):
             self.codes[krx['code'].values[idx]] = krx['company'].values[idx]
 
-    def get_daily_price(self, code, start_date=None, end_date=None):
+    def get_daily_price(self, code, start_date=None, end_date=None):  # 인수=None 형식 사용하면 인숫값이 주어지지 않았을 때 기본값으로 처리
         """KRX 종목의 일별 시세를 데이터프레임 형태로 반환
             - code       : KRX 종목코드('005930') 또는 상장기업명('삼성전자')
-            - start_date : 조회 시작일('2020-01-01'), 미입력 시 1년 전 오늘
-            - end_date   : 조회 종료일('2020-12-31'), 미입력 시 오늘 날짜
+            - start_date : 조회 시작일('2020-08-19'), 미입력 시 1년 전 오늘
+            - end_date   : 조회 종료일('2021-08-19'), 미입력 시 오늘 날짜
         """
-        if start_date is None:
+        if start_date is None:  # 조회시작일로 넘겨받은 인수가 None이면, 인수가 입력되지 않은 것이므로 
             one_year_ago = datetime.today() - timedelta(days=365)
-            start_date = one_year_ago.strftime('%Y-%m-%d')
+            start_date = one_year_ago.strftime('%Y-%m-%d')  # 1년 전 오늘 날짜로 %Y-%m-%d 형식 문자열로 처리
             print("start_date is initialized to '{}'".format(start_date))
-        else:
-            start_lst = re.split('\D+', start_date)
+        else:  # -------------여기부터 날짜 입력 처리 ------------------
+            start_lst = re.split('\D+', start_date)  # 정규표현식 \D+로 분리하면 연, 월, 일에 해당하는 숫자만 남음
             if start_lst[0] == '':
                 start_lst = start_lst[1:]
             start_year = int(start_lst[0])
@@ -48,7 +48,7 @@ class MarketDB:
             if start_day < 1 or start_day > 31:
                 print(f"ValueError: start_day({start_day:d}) is wrong.")
                 return
-            start_date=f"{start_year:04d}-{start_month:02d}-{start_day:02d}"
+            start_date=f"{start_year:04d}-{start_month:02d}-{start_day:02d}"  # 분리된 연, 월, 일을 다시 해당 형식 문자열로 구성하면 DB에 저장된 형식과 같게 됨.
 
         if end_date is None:
             end_date = datetime.today().strftime('%Y-%m-%d')
@@ -69,7 +69,7 @@ class MarketDB:
             if end_day < 1 or end_day > 31:
                 print(f"ValueError: end_day({end_day:d}) is wrong.")
                 return
-            end_date = f"{end_year:04d}-{end_month:02d}-{end_day:02d}"
+            end_date = f"{end_year:04d}-{end_month:02d}-{end_day:02d}"   # ------------여기까지 날짜 입력 처리---------------
          
         codes_keys = list(self.codes.keys())
         codes_values = list(self.codes.values())
