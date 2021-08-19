@@ -3,6 +3,11 @@
 
 
 ## 1. [주가 데이터 DB 구축](https://github.com/inandout-kr/SecuritiesDataAnalysisPython/tree/main/code/Stock_Price_API/HanStock)
+
+국내 유가증권시장, 코스닥 내 전 종목의 일별 종가 DB를 구축해서, 필요할 때마다 간편하게 데이터를 사용할 수 있도록 구축함.
+
+추후 틱 데이터도 모을 예정임.
+
 ### DBUpdater Class는 매일 한국거래소로부터 상장기업 목록 조회 후, 네이버로부터 일별 시세 읽어와서 MariaDB로 업데이트 함. 매일 오후 5시에 자동 실행(완료).
 
 ### MarketDB Class는 야후 파이낸스 API처럼 국내 주식 데이터 조회할 수 있는 함수 제공(개발 진행 중).
