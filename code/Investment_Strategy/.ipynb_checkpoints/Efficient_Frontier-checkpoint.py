@@ -36,7 +36,6 @@ for i, s in enumerate(stock):  # i 값은 0, 1, 2, 3 순으로, s값은 '삼성�
 df = pd.DataFrame(portfolio) 
 df = df[['Returns', 'Risk'] + [s for s in stock]]
 
-print(df)
 df.plot.scatter(x='Risk', y='Returns', figsize=(10,7), grid=True)
 plt.title('Efficient Frontier')
 plt.xlabel('Risk')
