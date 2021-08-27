@@ -1,6 +1,8 @@
 # SecuritiesDataAnalysisPython
 '파이썬 증권 데이터 분석' 책을 이용한 복습
 
+*현재 DB 내 2021-08-05 기간 이후 데이터에 이상치 이슈 발생. 해결 중
+
 
 ## 1. [주가 데이터 DB 구축](https://github.com/inandout-kr/SecuritiesDataAnalysisPython/tree/main/code/Stock_Price_API/HanStock)
 
@@ -8,9 +10,9 @@
 
 추후 틱 데이터도 모을 예정임.
 
-#### DBUpdater Class는 매일 한국거래소로부터 상장기업 목록 조회 후, 네이버로부터 일별 시세 읽어와서 MariaDB로 업데이트 함. 매일 오후 5시에 자동 실행(개발 완료).
+#### DBUpdater Class는 매일 한국거래소로부터 상장기업 목록 조회 후, 네이버로부터 일별 시세 읽어와서 MariaDB로 업데이트 함. 매일 오후 5시에 자동 실행(완료).
 
-#### MarketDB Class는 야후 파이낸스 API처럼 국내 주식 데이터 조회할 수 있는 함수 제공(개발 완료).
+#### MarketDB Class는 야후 파이낸스 API처럼 국내 주식 데이터 조회할 수 있는 함수 제공(완료).
 
 
 
@@ -27,3 +29,15 @@
 (3) MarketDB Class
  * 야후 파이낸스 API처럼 국내 주식 데이터 조회할 수 있는 함수 제공.
  * 어떠한 형식으로 날짜 정보(연-월-일) 입력해도 정규표현식을 이용해 숫자가 아닌 하나 이상의 문자(\D+)로 분리하면 날짜 정보(연-월-일)에 해당하는 값을 리스트로 반환 가능함.
+
+
+
+## 2. [투자 전략 구현](https://github.com/inandout-kr/SecuritiesDataAnalysisPython/tree/main/code/Investment_Strategy)
+
+Harry Max Markowitz가 구축한 현대 포트폴리오 이론부터 듀얼 모멘텀 전략까지 다양한 전략을 구현함.
+
+* [Efficient Frontier(완료)](https://github.com/inandout-kr/SecuritiesDataAnalysisPython/blob/main/code/Investment_Strategy/Efficient_Frontier.py) [(Jupyter)](https://github.com/inandout-kr/SecuritiesDataAnalysisPython/blob/main/code/Investment_Strategy/Efficient_Frontier(Jupyter).ipynb)
+* 볼린저 밴드를 이용한 추세 추종, 반전 매매기법
+* 삼중창 매매기법
+* 듀얼 모멘텀 전략(상대 + 절대 모멘텀)
+
