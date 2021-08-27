@@ -36,7 +36,7 @@
 
 Harry Max Markowitz가 구축한 현대 포트폴리오 이론부터 듀얼 모멘텀 전략까지 다양한 전략을 구현함.
 
-* [Efficient Frontier(완료)](https://github.com/inandout-kr/SecuritiesDataAnalysisPython/blob/main/code/Investment_Strategy/Efficient_Frontier.py) [(Jupyter)](https://github.com/inandout-kr/SecuritiesDataAnalysisPython/blob/main/code/Investment_Strategy/Efficient_Frontier(Jupyter).ipynb)
+* [Efficient Frontier](https://github.com/inandout-kr/SecuritiesDataAnalysisPython/blob/main/code/Investment_Strategy/Efficient_Frontier.py) [(Jupyter)](https://github.com/inandout-kr/SecuritiesDataAnalysisPython/blob/main/code/Investment_Strategy/Efficient_Frontier(Jupyter).ipynb)
 * 볼린저 밴드를 이용한 추세 추종, 반전 매매기법
 * 삼중창 매매기법
 * 듀얼 모멘텀 전략(상대 + 절대 모멘텀)
