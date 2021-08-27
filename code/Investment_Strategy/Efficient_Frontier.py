@@ -8,7 +8,7 @@ mk = Analyzer.MarketDB()
 stock = ['삼성전자', 'SK하이닉스', 'NAVER', '카카오']
 df = pd.DataFrame()
 for i in stock:
-    df[i] = mk.get_daily_price(i, '2018-10-03', '2021-08-28')['close']
+    df[i] = mk.get_daily_price(i, '2017-07-18', '2021-08-27')['close']
 
 daily_ret = df.pct_change()
 annual_ret = daily_ret.mean()
